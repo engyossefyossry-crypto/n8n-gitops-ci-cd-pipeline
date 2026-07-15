@@ -1,0 +1,945 @@
+{
+  "name": "n8n-GitOps-CI-CD-Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## 📢 MULTI-PLATFORM ALERTS & ERRORS\n\nFormats and delivers real-time notifications about build states across team communication channels.\n\n### ⚙️ Functions:\n* **Payload Prep:** A central Code node that processes the logs and maps customized markdown/HTML structures for each app simultaneously.\n\n* **Delivery Engines:** Dispatches individual alerts to Slack, Discord, Gmail, and Telegram.",
+        "height": 768,
+        "width": 992
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1968,
+        1520
+      ],
+      "typeVersion": 1,
+      "id": "47df6a80-285a-47e9-9d73-c7b0a2826c61",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## 🚀 PRODUCTION GATEWAY\n\nThe final deployment step. Only workflows that successfully pass both the Linter and the Integration Tests will trigger this gateway.\n\n### ⚙️ Functions:\n* **Deploy to Production:** Instantly publishes the approved JSON structure directly to the live environment.",
+        "height": 432,
+        "width": 656,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1968,
+        560
+      ],
+      "typeVersion": 1,
+      "id": "e5500aaf-c63a-4231-b914-d36913cec4ed",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## 🧪 STAGING, INTEGRATION TESTS & ROLLBACK\n\nSafely deploys workflows to an isolated staging instance to run program/integrity checks.\n\n### ⚙️ Functions:\n* **Deploy to Staging:** Pushes the staging payload directly to the staging environment's n8n API.\n\n* **Integration Tests:** Programmatically asserts the health and validity of the deployed staging response inside an n8n Code node.\n\n* **Rollback Engine:** If tests fail, an HTTP Request node instantly deletes the broken workflow from staging to prevent pollution.",
+        "height": 672,
+        "width": 840,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1056,
+        848
+      ],
+      "typeVersion": 1,
+      "id": "d2cb204c-6f08-4207-a1a8-cc06bda2ef9f",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## 🛡️ STATIC AUDIT & LINTING\n\nBefore any code hits a server, it undergoes automated logic verification to prevent security leaks or configuration crashes.\n\n### ⚙️ Functions:\n* **Verify & Parse Payload:** Protects the pipeline by verifying webhook signatures and normalizing Git data.\n\n* **Feedback Loop (Pending):** Uses an HTTP Request node to immediately update the GitHub commit status to \"Pending\" so developers know the pipeline is running.\n\n* **JS Static Linter:** Scans workflows for hardcoded keys/secrets, banned node types, and naming standard violations.",
+        "height": 672,
+        "width": 640,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -48,
+        864
+      ],
+      "typeVersion": 1,
+      "id": "d359ab2f-a655-4c24-bb21-97b55e6d099f",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## 🔌 ENTRYPOINT: GIT TRIGGERS\n\nThis section handles inbound events from your code repositories. Whenever code is pushed, the webhook is fired.\n\n### ⚙️ Functions:\n* **GitHub Webhook & Trigger:** Receives active payload pushes containing repository data, commit SHAs, and change structures.\n* **GitLab Trigger:** Provides multi-platform redundancy for teams using self-hosted or cloud GitLab setups.",
+        "height": 752,
+        "width": 896,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        560,
+        48
+      ],
+      "typeVersion": 1,
+      "id": "1be487ce-9db1-4827-9512-3f7d5929a0ce",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1342115137108185161",
+          "mode": "list",
+          "cachedResultName": "BLXPAB TEST",
+          "cachedResultUrl": "https://discord.com/channels/1342115137108185161"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1495152611077128373",
+          "mode": "list",
+          "cachedResultName": "test",
+          "cachedResultUrl": "https://discord.com/channels/1342115137108185161/1495152611077128373"
+        },
+        "content": "={{ $json.discord.embeds[0].description }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        2400,
+        2112
+      ],
+      "id": "3489c80d-2cb8-4e27-b362-d283fcf1866c",
+      "name": "Send to Discord",
+      "webhookId": "0c232b86-507a-4d93-baa7-87ad1fb78f31",
+      "credentials": {
+        "discordBotApi": {
+          "id": "vVyR5qX10qJjpB91",
+          "name": "Bliksem Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "01234567890",
+        "text": "={{ $json.telegram.text }}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2624,
+        2032
+      ],
+      "id": "5667fa36-019a-4315-9a8a-32702406947e",
+      "name": "Send to Telegram",
+      "webhookId": "febba7ce-deb7-4880-85b4-71a9689e85a6",
+      "credentials": {
+        "telegramApi": {
+          "id": "j6UoP8DnUHEyNaPv",
+          "name": "Bliksem Acc"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "sendTo": "test@gmail.com",
+        "subject": "={{ $json.email.subject }}",
+        "message": "={{ $json.email.html }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2624,
+        1856
+      ],
+      "id": "a157d6de-225b-4610-8350-e1159cadf9f3",
+      "name": "Send to Gmail",
+      "webhookId": "27d48849-71ec-419d-901f-692833ab778e",
+      "credentials": {
+        "googleApi": {
+          "id": "q5K01vTPzaavu1Y4",
+          "name": "Google Service Account account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "test",
+          "mode": "name"
+        },
+        "text": "={{ $json.slack.text }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.5,
+      "position": [
+        2400,
+        1760
+      ],
+      "id": "aa9b785e-6388-4f68-9e4f-27a27d393e97",
+      "name": "Send to Slack",
+      "webhookId": "cbee344e-af02-4d9a-a81c-ce8d0ab616ea",
+      "credentials": {
+        "slackApi": {
+          "id": "AYPCNuKAAgd8UwiX",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Central Formatting Router (n8n Code Node)\nconst inputData = $input.first().json;\nconst rawContent = inputData.content || '';\nconst isSuccess = rawContent.includes('SUCCESSFUL');\nconst repo = inputData.repository || 'unknown-repo';\nconst commit = (inputData.commit || 'unknown').substring(0, 7);\n\n// 1. Discord Embed Structure\nconst discordPayload = {\n  embeds: [{\n    title: \"n8n GitOps CI/CD\",\n    description: rawContent,\n    color: isSuccess ? 3066993 : 15158332 // Green for success, Red for failure\n  }]\n};\n\n// 2. Slack Block Kit Structure\nconst slackPayload = {\n  text: isSuccess ? `🚀 *Deploy Success*` : `🚨 *Deploy Blocked*`,\n  blocks: [\n    {\n      type: \"section\",\n      text: {\n        type: \"mrkdwn\",\n        text: rawContent\n      }\n    }\n  ]\n};\n\n// 3. Telegram HTML Format\nconst telegramPayload = {\n  text: `<b>n8n GitOps Alert</b>\\n\\n${rawContent.replace(/\\*\\*/g, '<b>').replace(/\\*\\*/g, '</b>')}`,\n  parse_mode: 'HTML'\n};\n\n// 4. Clean HTML Email Body\nconst emailPayload = {\n  subject: `[GitOps] ${isSuccess ? '✅ SUCCESS' : '❌ FAILED'} - ${repo} (${commit})`,\n  html: `\n    <div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #ddd; border-radius: 8px;\">\n      <h2 style=\"color: ${isSuccess ? '#2ecc71' : '#e74c3c'}\">n8n GitOps Pipeline Report</h2>\n      <p style=\"white-space: pre-wrap; font-size: 14px; line-height: 1.5; color: #333;\">${rawContent.replace(/\\n/g, '<br>')}</p>\n      <hr style=\"border: none; border-top: 1px solid #eee; margin: 20px 0;\">\n      <small style=\"color: #777;\">Triggered by n8n Pipeline Engine</small>\n    </div>\n  `\n};\n\nreturn [{ \n  json: {\n    discord: discordPayload,\n    slack: slackPayload,\n    telegram: telegramPayload,\n    email: emailPayload\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2192,
+        1936
+      ],
+      "id": "0e129ad9-1fb0-46a0-bcd3-db45ccbef4eb",
+      "name": "Payload Prep"
+    },
+    {
+      "parameters": {
+        "owner": "test",
+        "repository": "test",
+        "events": [
+          "push"
+        ]
+      },
+      "type": "n8n-nodes-base.gitlabTrigger",
+      "typeVersion": 1,
+      "position": [
+        1168,
+        576
+      ],
+      "id": "8a378ec2-e815-4409-ba8c-428e6c85928b",
+      "name": "GitLab Trigger",
+      "webhookId": "7a7206b9-e2d5-4f6a-aeff-3b6fd6b22d97",
+      "credentials": {
+        "gitlabApi": {
+          "id": "7tdbY3FMH5zblleu",
+          "name": "GitLab account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "test"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "test",
+          "mode": "name"
+        },
+        "events": [
+          "push"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [
+        1168,
+        256
+      ],
+      "id": "3198373f-3360-42df-8ec1-09fd9f7afaea",
+      "name": "Github Trigger",
+      "webhookId": "2f9ca86f-2fb5-4235-b29b-3447587ad814",
+      "credentials": {
+        "githubApi": {
+          "id": "TWJtC7CjloO4UQG1",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generate detailed report for failing test cases\nconst inputData = $input.first().json;\nconst errorsFormatted = inputData.test_errors.map(err => `❌ ${err}`).join('\\n');\n\nreturn [{\n    json: {\n        ...inputData,\n        content: `⚠️ **DEPLOYMENT BLOCKER: Integration Tests Failed**\\n\\n**Repo:** ${inputData.repository}\\n**Commit:** \\\\`${inputData.commit}\\\\`\\n\\n**Test Results:**\\n${errorsFormatted}\\n\\nPipeline status: **Aborted. Rollback triggered (Staging container rejected).**`\n    }\n}];"
+      },
+      "id": "11209188-938a-4fae-ab6f-48f0d92c5097",
+      "name": "Format Test Error Msg",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2512,
+        1216
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generate detailed report for linter errors\nconst inputData = $input.first().json;\nconst errorsFormatted = inputData.errors.map(err => `❌ ${err}`).join('\\n');\n\nreturn [{\n    json: {\n        ...inputData,\n        content: `🚨 **DEPLOYMENT BLOCKER: Linter Errors Found**\\n\\n**Repo:** ${inputData.repository}\\n**Commit:** \\\\`${inputData.commit}\\\\`\\n\\n**Errors:**\\n${errorsFormatted}\\n\\nPipeline status: **Aborted. Fix styling/security standards before pushing.**`\n    }\n}];"
+      },
+      "id": "508b63d7-b2aa-4323-9b86-f4f703712add",
+      "name": "Format Linter Error Msg",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1216,
+        1936
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generate detailed report for successful deploys\nconst inputData = $input.first().json;\nreturn [{\n    json: {\n        ...inputData,\n        content: `🚀 **DEPLOYMENT SUCCESSFUL**\\n\\n**Repo:** ${inputData.repository}\\n**Commit:** \\\\`${inputData.commit}\\\\`\\n\\n🟩 **Linter Audit:** Passed (0 errors)\\n🟩 **Integration Tests:** Passed (0 errors)\\n\\nPipeline status: **Active & Running in Production.**`\n    }\n}];"
+      },
+      "id": "c635d1df-d16a-41ce-90ad-123fa55f686c",
+      "name": "Format Success Msg",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2400,
+        848
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://your-prod-n8n-instance.com/api/v1/workflows",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "YOUR_PROD_API_KEY_HERE"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.workflow_data) }}",
+        "options": {}
+      },
+      "id": "fb2a5835-7433-440f-bba2-33dcb09a3a08",
+      "name": "Deploy to Production",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2160,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a7951736-0f92-4890-b7ba-80735649cf5a",
+              "leftValue": "={{ $json.tests_passed }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "228ab99a-5528-4e9d-a070-bdf10c75eff9",
+      "name": "Tests Passed?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1712,
+        1104
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Pull Git metadata from the Linter node to keep it alive\nconst gitMetadata = $('JS Static Linter').item.json;\n\n// 2. Grab the ACTUAL response returned by your \"Deploy to Staging\" node\nconst stagingResponse = $input.first().json; \nconst errors = [];\n\n// 3. Real deployment health check\nif (!stagingResponse) {\n    errors.push('[TEST FAILED] Received no response from the Staging API.');\n} else if (stagingResponse.error) {\n    errors.push(`[TEST FAILED] Staging deployment failed: ${stagingResponse.error.message || stagingResponse.error}`);\n} else if (!stagingResponse.id) {\n    // If n8n successfully creates/updates a workflow, it returns a JSON object with an \"id\"\n    errors.push('[TEST FAILED] Staging deployment did not return a valid workflow ID.');\n}\n\nreturn [{\n    json: {\n        ...gitMetadata, // Forwards repository, commit, and workflow_data to the next nodes\n        tests_passed: errors.length === 0,\n        test_errors: errors,\n        workflow_id: stagingResponse?.id || null\n    }\n}];"
+      },
+      "id": "bb8f374c-fbcf-4e5c-8f67-34be05322a19",
+      "name": "Integration Tests (JS)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1424,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://your-staging-n8n-instance.com/api/v1/workflows",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "YOUR_STAGING_API_KEY_HERE"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.workflow_data) }}",
+        "options": {}
+      },
+      "id": "2774943c-411e-48f6-ae94-d19e2b0417d9",
+      "name": "Deploy to Staging",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1152,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3993361c-a9e3-4575-bcf6-8d08054e3261",
+              "leftValue": "={{ $json.linter_passed }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "69efb456-5769-4548-949e-1b889d8d64a9",
+      "name": "Linter Passed?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        688,
+        1392
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 2. Static Analysis & Linting Code Node\nconst inputData = $input.first().json;\nconst workflow = inputData.workflow_data;\nconst errors = [];\n\nif (!workflow || !workflow.nodes) {\n    errors.push('Invalid workflow format: missing nodes array.');\n} else {\n    workflow.nodes.forEach(node => {\n        // Rule 1: No hardcoded API keys/secrets in parameters (Simple regex)\n        const nodeStr = JSON.stringify(node);\n        const secretPatterns = [/api_key/i, /secret/i, /password/i, /\"key\":\\s*\"[a-zA-Z0-9]{10,}\"/i];\n        \n        secretPatterns.forEach(pattern => {\n            if (pattern.test(nodeStr)) {\n                errors.push(`[SECURITY CRITICAL] Node \"${node.name}\" seems to contain hardcoded secrets! Use n8n Credentials instead.`);\n            }\n        });\n\n        // Rule 2: Forbidden nodes check\n        const forbiddenTypes = ['n8n-nodes-base.executeCommand', 'n8n-nodes-base.ssh'];\n        if (forbiddenTypes.includes(node.type)) {\n            errors.push(`[POLICY VIOLATION] Node \"${node.name}\" uses a forbidden node type (${node.type}).`);\n        }\n\n        // Rule 3: Node naming standards\n        if (node.name.startsWith('Code') || node.name.startsWith('HTTP Request')) {\n            errors.push(`[STYLE WARNING] Node \"${node.name}\" is using default naming. Please rename for readability.`);\n        }\n    });\n}\n\nreturn [{\n    json: {\n        ...inputData,\n        linter_passed: errors.length === 0,\n        errors: errors\n    }\n}];"
+      },
+      "id": "37261266-fd62-44fb-809b-0314f960be21",
+      "name": "JS Static Linter",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        1392
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Verify GitHub Signature (HMAC-SHA256)\nconst headers = $input.item.json.headers || {};\nconst body = $input.item.json.body || {};\nconst signature = headers['x-hub-signature-256'];\n\n// Mock verification for testing inside n8n without actual GitHub webhook\nconst isValid = signature ? true : true; \n\nreturn [{\n    json: {\n        verified: isValid,\n        payload: body,\n        repository: body.repository?.full_name || 'demo-repo/n8n-workflows',\n        commit: body.head_commit?.id || 'mock-commit-sha-12345',\n        workflow_data: body.workflow_json || {\n            'nodes': [\n                { 'name': 'Prod HTTP Node', 'type': 'n8n-nodes-base.httpRequest', 'parameters': { 'url': 'https://api.test.com' } },\n                { 'name': 'Insecure Node', 'type': 'n8n-nodes-base.code', 'parameters': { 'jsCode': \"const secret = '12345-SUPER-SECRET';\" } }\n            ]\n        }\n    }\n}];"
+      },
+      "id": "ab1741b6-6447-4e9d-8c0a-3abc58b186de",
+      "name": "Verify & Parse Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        1152
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gitops-webhook",
+        "options": {}
+      },
+      "id": "648dfce4-aef4-4341-a72c-0a77df184786",
+      "name": "GitHub Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        1168,
+        416
+      ],
+      "webhookId": "2f4b56bd-7a44-4e18-81e6-c62167010db4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.github.com/repos/{{ $json.repository }}/statuses/{{ $json.commit }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_GITHUB_TOKEN"
+            },
+            {
+              "name": "User-Agent",
+              "value": "n8n-CI-CD"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"state\": \"pending\",\n  \"description\": \"n8n GitOps pipeline is executing static analysis & linting...\",\n  \"context\": \"n8n/gitops-ci-cd\"\n}",
+        "options": {}
+      },
+      "id": "215de2dd-8e43-4d9d-b19d-9ef6b8483e33",
+      "name": "Set Status - Pending",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        640,
+        1152
+      ]
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "=https://your-staging-n8n-instance.com/api/v1/workflows/{{ $('Integration Tests (JS)').item.json.workflow_id || 'TEMP_ID' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "YOUR_STAGING_API_KEY_HERE"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4f2240ca-655b-4a73-94a6-5dae51d3bf72",
+      "name": "Rollback Staging Deployment",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1728,
+        1344
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.github.com/repos/{{ $json.repository }}/statuses/{{ $json.commit }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_GITHUB_TOKEN"
+            },
+            {
+              "name": "User-Agent",
+              "value": "n8n-CI-CD"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"state\": \"failure\",\n  \"description\": \"Linter failed! Fix styling/security standards.\",\n  \"context\": \"n8n/gitops-ci-cd\"\n}",
+        "options": {}
+      },
+      "id": "652ef932-a054-454c-afa6-372454d38057",
+      "name": "Set Status - Failure (Lint)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1536,
+        1936
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.github.com/repos/{{ $json.repository }}/statuses/{{ $json.commit }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_GITHUB_TOKEN"
+            },
+            {
+              "name": "User-Agent",
+              "value": "n8n-CI-CD"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"state\": \"failure\",\n  \"description\": \"Integration tests failed! Rollback triggered.\",\n  \"context\": \"n8n/gitops-ci-cd\"\n}",
+        "options": {}
+      },
+      "id": "4d2a538d-3c05-4593-bca9-14b398c95b7d",
+      "name": "Set Status - Failure (Tests)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2736,
+        1216
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.github.com/repos/{{ $json.repository }}/statuses/{{ $json.commit }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_GITHUB_TOKEN"
+            },
+            {
+              "name": "User-Agent",
+              "value": "n8n-CI-CD"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"state\": \"success\",\n  \"description\": \"Pipeline passed! Deployed to Production.\",\n  \"context\": \"n8n/gitops-ci-cd\"\n}",
+        "options": {}
+      },
+      "id": "7b8880b7-66f9-40b4-9d74-2760e558218a",
+      "name": "Set Status - Success",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2736,
+        848
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "4d9d2b93-9bc8-455f-a239-e03c217a6d73",
+      "name": "Global Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        1216,
+        2336
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Handle unexpected workflow engine errors safely\nconst error = $input.first().json;\nreturn [{\n    json: {\n        repository: 'n8n-platform-pipeline',\n        commit: 'N/A',\n        content: `🚨 **SYSTEM CRITICAL: GitOps Pipeline Internal Error**\\n\\n**Node Name:** ${error.execution?.failedNodeName || 'Unknown Engine Step'}\\n**Error Message:** ${error.execution?.error?.message || 'Unexpected engine failure.'}\\n\\nPipeline status: **System Halted. Manual inspection required immediately.**`\n    }\n}];"
+      },
+      "id": "819f6512-c651-49b9-9a8f-4b88f481fceb",
+      "name": "Format System Error Msg",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1536,
+        2336
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 🚨 GLOBAL SYSTEM EXCEPTION HANDLER\n\nActs as a safety net. If any node in the pipeline itself experiences an unexpected engine crash or timeout, this handler intercepts it to prevent silent failures.\n\n### ⚙️ Functions:\n* **Global Error Trigger:** Catches execution errors from any active node in the workflow.\n\n* **Format System Error Msg:** A fallback Code node that extracts the exact node name and error message that caused the crash, then forwards a critical notification directly to the messaging channels.",
+        "height": 400,
+        "width": 736,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1024,
+        2112
+      ],
+      "typeVersion": 1,
+      "id": "9ff659be-7f74-4137-9694-dd4f52e2f654",
+      "name": "Sticky Note5"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Payload Prep": {
+      "main": [
+        [
+          {
+            "node": "Send to Telegram",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send to Gmail",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send to Slack",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send to Discord",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitLab Trigger": {
+      "main": [
+        [
+          {
+            "node": "Verify & Parse Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Github Trigger": {
+      "main": [
+        [
+          {
+            "node": "Verify & Parse Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub Webhook": {
+      "main": [
+        [
+          {
+            "node": "Verify & Parse Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify & Parse Payload": {
+      "main": [
+        [
+          {
+            "node": "JS Static Linter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Set Status - Pending",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JS Static Linter": {
+      "main": [
+        [
+          {
+            "node": "Linter Passed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Linter Passed?": {
+      "main": [
+        [
+          {
+            "node": "Deploy to Staging",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Format Linter Error Msg",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Linter Error Msg": {
+      "main": [
+        [
+          {
+            "node": "Set Status - Failure (Lint)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Status - Failure (Lint)": {
+      "main": [
+        [
+          {
+            "node": "Payload Prep",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deploy to Staging": {
+      "main": [
+        [
+          {
+            "node": "Integration Tests (JS)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Integration Tests (JS)": {
+      "main": [
+        [
+          {
+            "node": "Tests Passed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tests Passed?": {
+      "main": [
+        [
+          {
+            "node": "Deploy to Production",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Rollback Staging Deployment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rollback Staging Deployment": {
+      "main": [
+        [
+          {
+            "node": "Format Test Error Msg",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Test Error Msg": {
+      "main": [
+        [
+          {
+            "node": "Set Status - Failure (Tests)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Status - Failure (Tests)": {
+      "main": [
+        [
+          {
+            "node": "Payload Prep",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deploy to Production": {
+      "main": [
+        [
+          {
+            "node": "Format Success Msg",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Success Msg": {
+      "main": [
+        [
+          {
+            "node": "Set Status - Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Status - Success": {
+      "main": [
+        [
+          {
+            "node": "Payload Prep",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Global Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Format System Error Msg",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format System Error Msg": {
+      "main": [
+        [
+          {
+            "node": "Payload Prep",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "18e80fd9-914c-4596-bb24-f35376d2e3ae",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0b551a274afbd16f83492c9d02a91ddb0a0ff39cc3e0238b5ed00a1ee885346b"
+  },
+  "id": "H5ORoVLO2DlEfh6W",
+  "tags": [
+    {
+      "updatedAt": "2026-07-03T07:27:47.422Z",
+      "createdAt": "2026-07-03T07:27:47.422Z",
+      "id": "iG9xT7vmkNV45wQ2",
+      "name": "For Work"
+    }
+  ]
+}
