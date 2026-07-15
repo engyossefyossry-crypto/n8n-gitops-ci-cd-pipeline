@@ -1,159 +1,193 @@
-<h1 align="center">🚨 Autonomous DevSecOps Triage Engine PRO</h1>
+<h1 align="center">🚨 Enterprise n8n GitOps CI/CD Pipeline PRO</h1>
 
-<h3 align="center">Enterprise-Grade Multi-Agent Incident Commander, Observability Metric Core & Self-Healing Telemetry Pipeline</h3>
+<h3 align="center">Production-Grade Automated Linting, Staging Isolation, Integration Testing, Instant Rollbacks & Multi-Platform Alert Engine</h3>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Automation-n8n-FF6C37?style=for-the-badge&logo=n8n&logoColor=white" alt="n8n">
-  <img src="https://img.shields.io/badge/Inference-Groq_API-F54E42?style=for-the-badge&logo=fastapi&logoColor=white" alt="Groq">
-  <img src="https://img.shields.io/badge/Model_Mesh-OpenRouter-007ACC?style=for-the-badge&logo=openaccess&logoColor=white" alt="OpenRouter">
-  <img src="https://img.shields.io/badge/Observability-Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana">
-  <img src="https://img.shields.io/badge/Security-DevSecOps_Hardened-38A169?style=for-the-badge&logo=dataguard&logoColor=white" alt="Security">
+  <img src="https://img.shields.io/badge/Version_Control-GitHub_/_GitLab-181717?style=for-the-badge&logo=github&logoColor=white" alt="Git">
+  <img src="https://img.shields.io/badge/QA_Testing-JS_Static_Linter-3178C6?style=for-the-badge&logo=javascript&logoColor=white" alt="Linter">
+  <img src="https://img.shields.io/badge/Security-Hardened_Audit-38A169?style=for-the-badge&logo=dataguard&logoColor=white" alt="Security">
 </p>
 
 <p align="center">
-  <img src="assets/workflow-canvas.png" alt="Autonomous DevSecOps Triage Engine PRO Workflow Canvas" width="100%">
+  <img src="assets/workflow-canvas.png" alt="n8n GitOps CI/CD Pipeline Pro Workflow Canvas" width="100%">
 </p>
 
 ---
 
-## 📖 The Evolution: Moving from Basic Automation to LLMOps
+## 📖 The Evolution: Moving from Manual Imports to Infrastructure as Code (IaC)
 
-The original DevSecOps Triage Engine proved that AI could manage an incident response cycle. However, real production systems do not operate on a happy path. Network APIs fail, rate limits choke models, and independent AI agents can generate conflicting analyses or experience hallucinations.
+Manually copying and pasting JSON files or uploading raw workflows into production n8n environments is a massive threat to system stability. In a professional ecosystem, workflows are code—which means they must be version-controlled, programmatically audited, and tested in isolation before going live.
 
-The **PRO Version** represents a complete paradigm shift in AI orchestration. Instead of blindly executing sequential actions, **Triage Engine PRO** treats LLMs as raw compute resources that must be routed dynamically, audited heavily, and protected by deterministic code boundaries. It utilizes a highly resilient, self-healing **Evaluation Pipeline** featuring parallel agent swarms, confidence-aware QA gatekeeping, granular infrastructure exception handling, and real-time Grafana observability telemetry.
+The **n8n GitOps CI/CD Pipeline PRO** turns your n8n workflows into a reliable, automated release lifecycle. When a developer pushes a workflow JSON to Git, this pipeline interceptor instantly takes over. It validates security compliance, deploys to a staging instance, runs programmatic health tests, triggers an automated rollback if the deployment breaks, and only promotes the changes to production when the build is proven to be 100% stable.
 
 ---
 
 ## 🏗️ Architectural Topology & Dual-Track Execution
 
-The core runtime separates processing vectors into two distinct, isolated paths: a **Success Track** governed by a high-tier QA Auditor, and an **Error Track** that captures infrastructure faults (like LLM rate limits) to build machine-readable anomaly reports without crashing the pipeline.
+The pipeline is split into logical stages protected by strict JavaScript validation gates. If a check fails at any point, the pipeline aborts deployment, updates the commit status on Git, and fires localized error alerts across all operational messaging tools.
 
 ```text
-                              [ Reactive Incident Webhook ] 
-                                             │
-                                             ▼
-                                  [ Data Preparer Node ]
-                                             │
-                                             ▼
-                                  [ Supervisor Orchestrator ]
-                                             │
-             ┌───────────────────────────────┴───────────────────────────────┐
-             ▼ (SUCCESS TRACK: Parallel Inference Swarm)                     ▼ (FAILURE TRACK: Active Fault Interception)
-   ┌───────────────────┼───────────────────┐                         [ Node API Crash / Network Timeout ]
-   ▼                   ▼                   ▼                                         │
-┌─────────────┐ ┌─────────────┐ ┌─────────────┐                                      ▼
-│  Hardcore   │ │   Risk      │ │   PR & Status │                                [ Switch Node ]
-│  Developer  │ │  Evaluator  │ │   Manager   │                    ┌──────────────────┼──────────────────┐
-└──────┬──────┘ └──────┬──────┘ └──────┬──────┘                    ▼                  ▼                  ▼
-       │               │               │                      [429/Timeout]       [400/Bad Input]     [Other Exceptions]
-       └───────────────┼───────────────┘                           │                  │                  │
-                       ▼                                           └──────────────────┼──────────────────┘
-              [ Merge by Position ]                                                   ▼
-                       │                                                     [ Set Error Schemas ]
-                       ▼                                                             │
-              [ Auditing Inspector ]                                                 ▼
-                       │                                                     [ Error Informer ]
-                       ▼                                                             │
-            [ Pass / Fail IF Gate ]                                                  │
-             ┌─────────┴─────────┐                                                   │
-             ▼ (Pass)            ▼ (Fail/Contradiction)                              │
-             │                   └───────────────────┬───────────────────────────────┘
-             ▼                                       ▼
-  [ Update Grafana Dashboard ]             [ Deterministic Aggregator Layer ]
-             │                                       │
-             └───────────────────┬───────────────────┘
-                                 ▼
-                     [ Final Output Formatter ]
-                                 │
-         ┌───────────────┬───────┴───────┬───────────────┬───────────────┐
-         ▼               ▼               ▼               ▼               ▼
-  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌────────────┐
-  │ Slack Devs │  │ Gmail HTML │  │ Discord HQ │  │ GitHub     │  │ Telegram & │
-  │ Markdown   │  │ Executives │  │ Rich Embed │  │ Bug Ticket │  │ Sheets Log │
-  └────────────┘  └────────────┘  └────────────┘  └────────────┘  └────────────┘
+                             [ Git Webhook Trigger ]
+                       (GitHub Push, GitLab Push, Webhook)
+                                       │
+                                       ▼
+                           [ Verify & Parse Payload ]
+                                       │
+                ┌──────────────────────┴──────────────────────┐
+                ▼ (Registers Build)                           ▼ (Executes Linting Engine)
+       [ Set Status - Pending ]                       [ JS Static Linter ]
+                                                              │
+                                            ┌─────────────────┴─────────────────┐
+                                            ▼ (Linter Fails)                    ▼ (Linter Passes)
+                                ┌───────────────────────┐           [ Deploy to Staging ]
+                                │ Set Status - Failure  │                       │
+                                │ Format Linter Error   │                       ▼
+                                └───────────┬───────────┘           [ Integration Tests (JS) ]
+                                            │                                   │
+                                            │                       ┌───────────┴───────────┐
+                                            │                       ▼ (Tests Fail)          ▼ (Tests Pass)
+                                            │           ┌───────────────────────┐   [ Deploy to Production ]
+                                            │           │ Rollback Staging      │           │
+                                            │           │ Set Status - Failure  │           ▼
+                                            │           │ Format Test Error     │   [ Set Status - Success ]
+                                            │           └───────────┬───────────┘   [ Format Success Msg ]
+                                            │                       │                       │
+                                            └───────────────────────┼───────────────────────┘
+                                                                    ▼
+                                                             [ Payload Prep ]
+                                                                    │
+                                         ┌──────────────────┬───────┴──────────┬──────────────────┐
+                                         ▼                  ▼                  ▼                  ▼
+                                   [ Send Slack ]     [ Send Gmail ]     [ Send Telegram ]  [ Send Discord ]
+
+                                   [ Global Error Trigger ] ────► [ Format System Error ] ────► [ Payload Prep ]
+
 ```
 
 ---
 
-## 🧠 Strategic AI Model Mesh (The Orchestration Rationale)
+## 🔍 Core Pipeline Phases & Engineered Node Logic
 
-Relying on a single AI model for complex system architecture leads to context drift and latency bottlenecks. This engine uses a **decoupled multi-model mesh**, routing specific operational tasks to models explicitly optimized for those workloads:
+### 1. Verification & Security Payload Parsing
 
-| Agent Role | Assigned Model | Provider | Strategic Rationale |
-| --- | --- | --- | --- |
-| **Supervisor & QA Inspector** | `llama-3.3-70b-versatile` | Groq | **The State Machine:** Operates on Groq's ultra-low latency compute layers. Chosen for its strict instruction-following capabilities. It acts purely as a routing and validation gatekeeper, ensuring strict JSON schema compliance and cross-examining worker agents for hallucinations. |
-| **Hardcore Developer** | `gemini-2.5-flash-lite` | OpenRouter | **The Forensic Analyst:** Code forensics requires parsing massive, chaotic stack traces. Gemini 2.5 Flash offers a massive context window and rapid processing speed, making it perfect for isolating broken scripts and writing pseudo-code patches. |
-| **Risk Evaluator** | `gemma-4-31b-it` | OpenRouter | **The Compliance Auditor:** Strong logical weighting and security guardrails make Gemma ideal for threat modeling, calculating CVE impact, and defining strict network isolation protocols without hallucinating fake vulnerabilities. |
-| **PR & Status Manager** | `gpt-oss-20b` | OpenRouter | **The Communicator:** Excellent at synthesizing highly technical jargon into clear, empathetic human prose for public status pages, while keeping internal Slack updates crisp and operational. |
-| **Error Informer** | `gpt-oss-120b` | Groq | **The Telemetry Engine:** A heavyweight model deployed strictly on the Error Track to parse complex n8n infrastructure crashes and translate raw pipeline failures into actionable executive summaries. |
+* **Webhook Authentication:** The `Verify & Parse Payload` node intercepts incoming JSON bodies. It is configured to run HMAC-SHA256 signature verification directly against headers to validate that payloads originate exclusively from trusted Git triggers.
+* **Metadata Preservation:** It extracts repository names, commit hashes, target file paths, and normalized JSON structures to pass cleanly down the execution line without structural loss.
+
+### 2. The JS Static Linter (Code Quality Gate)
+
+Before any system resource is used, the workflow JSON enters the `JS Static Linter` Node. This node executes custom sandboxed JavaScript to enforce strict engineering guidelines:
+
+* **Anti-Credential Leakage Rule:** It scans node configurations using specialized regex to prevent developers from hardcoding credentials directly into HTTP nodes instead of using n8n’s encrypted system credentials:
+```javascript
+const secretPatterns = [/api_key/i, /secret/i, /password/i, /"key":\s*\"[a-zA-Z0-9]{10,}\"/i];
+
+```
+
+
+* **Banned Node Type Policies:** It blocks hazardous nodes like Execute Command or SSH from sneaking into production environments to protect against arbitrary code execution exploits:
+```javascript
+const forbiddenTypes = ['n8n-nodes-base.executeCommand', 'n8n-nodes-base.ssh'];
+
+```
+
+
+* **Styling & Best Practices Naming Standards:** It forces developers to rename default generic nodes (`Code`, `HTTP Request`) to highly descriptive titles, dramatically improving team readability.
+
+### 3. Isolated Staging Deployment & Automated QA Integration
+
+* **Staging Promotion:** If the linter returns zero errors, the JSON is posted directly to the Staging API endpoint using the `Deploy to Staging` node.
+* **Integration Tests (JS):** The pipeline programmatically checks the staging deployment's health:
+```javascript
+if (!stagingResponse) {
+    errors.push('[TEST FAILED] Received no response from the Staging API.');
+} else if (stagingResponse.error) {
+    errors.push(`[TEST FAILED] Staging deployment failed: ${stagingResponse.error.message}`);
+} else if (!stagingResponse.id) {
+    errors.push('[TEST FAILED] Staging deployment did not return a valid workflow ID.');
+}
+
+```
+
+
+* **Instant Rollbacks:** If the staging API flags the imported workflow structure as unstable, the `Rollback Staging Deployment` node instantly issues an automated `DELETE` HTTP call to purge the corrupt instance, protecting the staging workspace.
+
+### 4. Git Status Feedback Loop
+
+The pipeline continuously keeps developers updated inside their existing tools. Using GitHub's/GitLab's Commit Status API, the pipeline updates the commit marker in real-time with three distinct state evaluations:
+
+* `state: pending` — Static analysis running.
+* `state: success` — Successfully validated and promoted to Production.
+* `state: failure` — Build rejected (Lint or Integration Test failure).
 
 ---
 
-## 📊 Internal Data Ledger Schemas (n8n Data Tables)
+## ⚡ Multi-Platform Payload Prep & Delivery Engine
 
-To ensure full historical transparency, individual sub-agents interact directly with native **n8n Data Tables**. This ensures an immutable audit log is generated *during* the execution turn, independent of external API delivery success.
+Instead of duplicating formatting actions across every messaging channel, the pipeline routes all final telemetry through a centralized `Payload Prep` node. This script-based central processing unit creates native payloads optimized for every target platform concurrently:
 
-### 1. Forensics Databank (`Store Debugging Attempt`)
+```javascript
+// 1. Discord Embed Output (Color-Coded Status Cards)
+const discordPayload = {
+  embeds: [{
+    title: "n8n GitOps CI/CD",
+    description: rawContent,
+    color: isSuccess ? 3066993 : 15158332 // Green / Red
+  }]
+};
 
-- `incident_id`
-- `target_file`
-- `line_number`
-- `patch_snippet`
+// 2. Slack Block Kit Structure (Engineered Layout Blocks)
+const slackPayload = {
+  text: isSuccess ? `🚀 *Deploy Success*` : `🚨 *Deploy Blocked*`,
+  blocks: [{
+    type: "section",
+    text: { type: "mrkdwn", text: rawContent }
+  }]
+};
 
-### 2. Compliance Databank (`Store Evaluation Attempt`)
+// 3. Telegram HTML Format (Clean Markup Support)
+const telegramPayload = {
+  text: `<b>n8n GitOps Alert</b>\n\n${rawContent.replace(/\*\*/g, '<b>')}`,
+  parse_mode: 'HTML'
+};
 
-- `incident_id`
-- `risk_score`
-- `compliance_impact`
-- `containment_protocol`
+// 4. Clean Responsive HTML Email Body (For Management & Auditing Updates)
+const emailPayload = {
+  subject: `[GitOps] ${isSuccess ? '✅ SUCCESS' : '❌ FAILED'} - ${repo} (${commit})`,
+  html: `<div style="font-family: Arial; border: 1px solid #ddd; border-radius: 8px; padding: 20px;">...</div>`
+};
 
-### 3. Communications Databank (`Store Current Status`)
-
-- `incident_id`
-- `slack_published`
-- `status_page_published`
+```
 
 ---
 
-## 🛠️ Advanced Engineering Pillars
+## 🛡️ Global Engine Failure Interception
 
-### 1. Parallel Agent Swarm & Confidence Scoring
+What happens if n8n runs out of memory, an API key suddenly expires, or a cloud provider rate-limits your pipeline? This workflow implements a resilient `Global Error Trigger` linked to `Format System Error Msg`.
 
-Instead of running agents sequentially, the Developer, Risk Evaluator, and PR Manager execute **simultaneously**. Every agent outputs a **Confidence Score (0.0–1.0)** to quantify certainty.
-
-### 2. The QA Inspector (Gatekeeper Node)
-
-Before any data reaches external systems, the Inspector validates consistency between all AI outputs. Contradictions or low confidence automatically reroute execution to the Error Track.
-
-### 3. Self-Healing Error Track & Regex Switching
-
-Rate limits, bad requests, or infrastructure failures are intercepted through deterministic routing instead of crashing the workflow.
-
-### 4. Real-Time Grafana Telemetry
-
-Every successful execution pushes structured metrics into Grafana, including classifications, risk scores, and confidence metrics.
+If any system-level crash occurs, the handler captures the error footprint, halts executions gracefully, bypasses regular logic channels, formats an emergency payload, and alerts the platform engineering team instantly without causing a silent platform freeze.
 
 ---
 
 ## 🚀 Installation & Setup
 
+Setting up your automated CI/CD pipeline is straightforward. Follow this step-by-step setup guide to get things running:
+
 ### Prerequisites
 
-- n8n v1+
-- Groq API Key
-- OpenRouter API Key
-- GitHub PAT
-- Slack/Discord Webhooks
-- Telegram Bot
-- Gmail OAuth/App Password
-- Google Sheets Credentials
-- Grafana (Optional)
+* **n8n Instance:** An active self-hosted or cloud instance running **n8n v1.0+** (with API access enabled).
+* **Two Environments:** An isolated n8n **Staging** instance and a live **Production** instance.
+* **Credentials:** You will need API keys or OAuth credentials for:
+* **GitHub** Personal Access Token (PAT) with `repo:status` scopes.
+* **n8n API Keys** for both Staging and Production environments (`X-N8N-API-KEY`).
+* Webhook setup configurations for target notifications (Slack, Discord, Telegram, Gmail).
 
-### Deployment
 
-1. Clone the repository.
 
-```text
+### Deploying the Pipeline
+
+1. **Clone & Setup:** Place the cloned structure directly inside your workspace:
+```bash
 n8n-gitops-ci-cd-pipeline/
 ├── assets/
 │   └── workflow-canvas.png
@@ -161,14 +195,19 @@ n8n-gitops-ci-cd-pipeline/
 │   └── n8n-gitops-ci-cd-pipeline.json
 ├── LICENSE
 └── README.md
+
 ```
 
-2. Import the workflow JSON into n8n.
-3. Connect all credentials.
-4. Create three n8n Data Tables:
-   - Store Debugging Attempt
-   - Store Evaluation Attempt
-   - Store Current Status
-5. Activate the workflow.
+
+2. **Import JSON:** Log into your primary administrative n8n workspace, create a new blank canvas, select **Import from File** in the top right menu, and upload `workflows/n8n-gitops-ci-cd-pipeline.json`.
+3. **Configure Endpoint Creds:** * Open the HTTP Request nodes (`Deploy to Staging`, `Rollback Staging Deployment`, and `Deploy to Production`) and link your staging/production API keys.
+* Open the `Set Status` nodes and replace `YOUR_GITHUB_TOKEN` with your GitHub PAT.
+
+
+4. **Link Communication Webhooks:** Fill out the Bot/API credentials in the **Send to Slack**, **Send to Discord**, **Send to Telegram**, and **Send to Gmail** nodes.
+5. **Set Git Webhook:** Configure your Git repository's Webhook settings to point directly to the Webhook URL generated by the `GitHub Webhook` node inside n8n.
+6. **Go Live:** Set the pipeline workflow switch to **Active**!
 
 ---
+
+## 📜 License
